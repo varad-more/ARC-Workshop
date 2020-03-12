@@ -1,0 +1,29 @@
+% Channel ID to read data from 
+readChannelID = 1015690; 
+% Temperature Field ID 
+Ax = 1; 
+% Wind speed Field ID 
+Ay = 2; 
+
+% Channel Read API Key   
+% If your channel is private, then enter the read API 
+% Key between the '' below:   
+readAPIKey = 'YNHGH9W5G08OTJCN'; 
+
+% Read Data. Learn more about the thingSpeakRead function by 
+% going to the Documentation tab on the right side pane of this page. 
+[data, timeStamps] = thingSpeakRead(readChannelID, 'Fields',[1 2 3 4 5 6],'NumPoints', 200, 'ReadKey', readAPIKey);
+
+% Extract the temperature data from the first column
+AxData = data(:, 1);
+% Extract the windspeed data from the second column
+AyData = data(:, 2);
+
+% Visualize Data
+yyaxis left
+plot(timeStamps, AxData);
+ylabel('Ax');
+
+yyaxis right
+plot(timeStamps, AyData);
+ylabel('Ay');
